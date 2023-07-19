@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GunController : MonoBehaviour
 {
@@ -13,29 +14,43 @@ public class GunController : MonoBehaviour
     [SerializeField] float nextTimeToFire;
     [SerializeField] int ammo;
 
-    // Update is called once per frame
-    void Update()
-    {
+    PlayerControls _playerControls;
 
+    private void Awake()
+    {
+        _playerControls = new PlayerControls();
+        _playerControls.Enable();
     }
 
-    public void Shoot()
+    private void OnEnable()
+    {
+        _playerControls.Player.Attack.started += Shoot;
+    }
+
+    private void OnDisable()
+    {
+        _playerControls.Player.Attack.started -= Shoot;
+    }
+
+    public void Shoot(InputAction.CallbackContext context)
     {
         if (ammo > 0)
         {
             muzzleFlash.Play();
 
             RaycastHit hit;
+            ammo -= 1;
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
                 IDamageable damageable;
 
+ 
                 hit.transform.TryGetComponent(out DamageTarget damageTarget);
                 damageable = damageTarget.GetComponent<IDamageable>();
                 damageable.TakeDamage(weaponDamage);
             }
 
-            ammo -= 1;
+
         }
         else
         {

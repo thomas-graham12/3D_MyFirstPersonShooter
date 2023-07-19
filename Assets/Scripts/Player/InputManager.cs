@@ -26,7 +26,7 @@ public class InputManager : MonoBehaviour
         _playerActions.SprintStart.performed += ctx => _playerMovement.SprintPressed();
         _playerActions.SprintFinish.performed += ctx => _playerMovement.SprintReleased();
 
-        _playerActions.Attack.performed += ctx => _gunController.Shoot();
+        //_playerActions.Attack.performed += ctx => _gunController.Shoot();
     }
 
     // Update is called once per frame
