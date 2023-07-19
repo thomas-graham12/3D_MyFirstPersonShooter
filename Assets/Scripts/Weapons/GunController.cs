@@ -34,11 +34,12 @@ public class GunController : MonoBehaviour
                 damageable = damageTarget.GetComponent<IDamageable>();
                 damageable.TakeDamage(weaponDamage);
             }
+
+            ammo -= 1;
         }
         else
         {
             Debug.Log("Cannot shoot anymore! Out of bullets!");
         }
-        ammo -= 1;
     }
 }
