@@ -12,14 +12,15 @@ public class GunController : MonoBehaviour
     [SerializeField] ParticleSystem muzzleFlash;
 
     [SerializeField] float nextTimeToFire;
-    [SerializeField] int ammo;
 
     PlayerControls _playerControls;
+    PlayerManager _playerManager;
 
     private void Awake()
     {
         _playerControls = new PlayerControls();
         _playerControls.Enable();
+        _playerManager = transform.root.GetComponent<PlayerManager>();
     }
 
     private void OnEnable()
@@ -34,12 +35,12 @@ public class GunController : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        if (ammo > 0)
+        if (_playerManager.pistolAmmo > 0)
         {
             muzzleFlash.Play();
 
             RaycastHit hit;
-            ammo -= 1;
+            _playerManager.pistolAmmo -= 1;
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
                 IDamageable damageable;

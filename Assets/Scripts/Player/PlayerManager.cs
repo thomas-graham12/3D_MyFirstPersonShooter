@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
 {
     public int health = 100;
     public int MaxHealth { get; private set; } = 100;
+    public int pistolAmmo;
 
     public bool allowDamage = true;
     
