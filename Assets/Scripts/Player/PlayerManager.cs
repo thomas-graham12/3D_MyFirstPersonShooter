@@ -33,6 +33,6 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damageAmount)
     {
-        if (allowDamage) health -= damageAmount;
+        health -= damageAmount;
     }
 }
