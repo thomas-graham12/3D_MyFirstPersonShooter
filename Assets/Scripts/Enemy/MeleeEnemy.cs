@@ -10,19 +10,9 @@ public class MeleeEnemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
-        
-
-        collision.transform.TryGetComponent(out PlayerManager playerManager);
-
-
-    }
-
-    void OnControllerColliderHit(ControllerColliderHit hit)
-    {
         IDamageable damageable;
 
-        hit.transform.TryGetComponent(out PlayerManager playerManager);
+        collision.transform.TryGetComponent(out PlayerManager playerManager);
 
         if (playerManager)
         {
@@ -37,6 +27,7 @@ public class MeleeEnemy : MonoBehaviour
             }
         }
     }
+
 
     IEnumerator ITimeBetweenDamage()
     {
