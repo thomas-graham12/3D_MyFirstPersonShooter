@@ -71,7 +71,6 @@ public class PlayerMovement : MonoBehaviour
             _velocity.y = -2f;
         }
         _controller.Move(_velocity * Time.deltaTime);
-        Debug.Log(_velocity.y);
     }
 
     public void Crouch()
