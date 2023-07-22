@@ -35,27 +35,40 @@ public class GunController : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        if (_playerManager.pistolAmmo > 0)
+        if (_playerManager.pistolAmmoInGun > 0)
         {
             muzzleFlash.Play();
 
             RaycastHit hit;
-            _playerManager.pistolAmmo -= 1;
+            _playerManager.pistolAmmoInGun -= 1;
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
-                IDamageable damageable;
-
- 
-                hit.transform.TryGetComponent(out DamageTarget damageTarget);
-                damageable = damageTarget.GetComponent<IDamageable>();
-                damageable.TakeDamage(weaponDamage);
+                if (hit.transform.TryGetComponent(out IDamageable damageable))
+                {
+                    //damageable = damageTarget.GetComponent<IDamageable>();
+                    damageable.TakeDamage(weaponDamage);
+                }
             }
-
-
         }
-        else
+
+        if (_playerManager.pistolAmmoInGun <= 0)
         {
-            Debug.Log("Cannot shoot anymore! Out of bullets!");
+            StartCoroutine(IReloadAmmo());
+        }
+    }
+
+    IEnumerator IReloadAmmo()
+    {
+        yield return new WaitForSeconds(1f);
+        if (_playerManager.pistolAmmoInStock > 0 && _playerManager.pistolAmmoInStock < _playerManager.maxPistolAmmo)
+        {
+            _playerManager.pistolAmmoInGun += _playerManager.pistolAmmoInStock;
+            _playerManager.pistolAmmoInStock = 0;
+        }
+        else if (_playerManager.pistolAmmoInStock > 0)
+        {
+            _playerManager.pistolAmmoInStock -= _playerManager.maxPistolAmmo;
+            _playerManager.pistolAmmoInGun += _playerManager.maxPistolAmmo;
         }
     }
 }

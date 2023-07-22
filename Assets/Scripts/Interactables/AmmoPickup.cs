@@ -12,7 +12,7 @@ public class AmmoPickup : MonoBehaviour
 
         if (playerManager)
         {
-            playerManager.pistolAmmo += ammoPickupAmount;
+            playerManager.pistolAmmoInGun += ammoPickupAmount;
 
             Destroy(gameObject);
         }

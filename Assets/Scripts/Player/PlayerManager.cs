@@ -7,14 +7,17 @@ public class PlayerManager : MonoBehaviour, IDamageable
 {
     public int health = 100;
     public int MaxHealth { get; private set; } = 100;
-    public int pistolAmmo;
+    public int pistolAmmoInStock;
+    public int pistolAmmoInGun;
+    public int maxPistolAmmo;
 
     public bool allowDamage = true;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        maxPistolAmmo = 10;
+        pistolAmmoInGun = maxPistolAmmo;
     }
 
     // Update is called once per frame
