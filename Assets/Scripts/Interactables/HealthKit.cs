@@ -2,18 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmmoPickup : MonoBehaviour
+public class HealthKit : MonoBehaviour
 {
-    [SerializeField] int ammoPickupAmount;
+    public int healthAmount;
 
     private void OnTriggerEnter(Collider other)
     {
         other.TryGetComponent(out PlayerManager playerManager);
-
         if (playerManager)
         {
-            playerManager.pistolAmmoInStock += ammoPickupAmount;
-
+            playerManager.health += healthAmount;
             Destroy(gameObject);
         }
     }

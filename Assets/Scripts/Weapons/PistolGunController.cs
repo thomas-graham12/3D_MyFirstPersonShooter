@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
-public class GunController : MonoBehaviour
+public class PistolGunController : MonoBehaviour
 {
     [SerializeField] int weaponDamage;
     [SerializeField] float range;
@@ -16,11 +17,18 @@ public class GunController : MonoBehaviour
     PlayerControls _playerControls;
     PlayerManager _playerManager;
 
+    [SerializeField] TextMeshProUGUI allPistolAmmoText;
+
     private void Awake()
     {
         _playerControls = new PlayerControls();
         _playerControls.Enable();
         _playerManager = transform.root.GetComponent<PlayerManager>();
+    }
+
+    private void Update()
+    {
+        allPistolAmmoText.text = _playerManager.pistolAmmoInGun + "/" + _playerManager.pistolAmmoInStock;
     }
 
     private void OnEnable()
@@ -59,6 +67,7 @@ public class GunController : MonoBehaviour
 
     IEnumerator IReloadAmmo()
     {
+        _playerControls.Player.Attack.started -= Shoot;
         yield return new WaitForSeconds(1f);
         if (_playerManager.pistolAmmoInStock > 0 && _playerManager.pistolAmmoInStock < _playerManager.maxPistolAmmo)
         {
@@ -70,5 +79,6 @@ public class GunController : MonoBehaviour
             _playerManager.pistolAmmoInStock -= _playerManager.maxPistolAmmo;
             _playerManager.pistolAmmoInGun += _playerManager.maxPistolAmmo;
         }
+        _playerControls.Player.Attack.started += Shoot;
     }
 }
