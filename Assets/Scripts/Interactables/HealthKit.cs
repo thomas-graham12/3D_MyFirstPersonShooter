@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class HealthKit : MonoBehaviour
 {
+    PlayerManager _playerManager;
     public int healthAmount;
 
-    private void OnTriggerEnter(Collider other)
+    public void HealPlayer()
     {
-        other.TryGetComponent(out PlayerManager playerManager);
-        if (playerManager)
-        {
-            playerManager.health += healthAmount;
-            Destroy(gameObject);
-        }
+        _playerManager.health += healthAmount;
     }
 }

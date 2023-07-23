@@ -297,13 +297,47 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166384379}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &370476433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 997826016404956144, guid: 958b625f997221f4ebb86fb1f03eaf80,
+    type: 3}
+  m_PrefabInstance: {fileID: 2829595943424959958}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &370476434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370476433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13146f3e4aa857f40a652f7a4ed75936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInRange: 0
+  onInteractEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 370476433}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SendMessage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: This is working
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!43 &403414516
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-54250
+  m_Name: pb_Mesh-1266
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -694,7 +728,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-45622
+  m_Name: pb_Mesh-1238
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1485,7 +1519,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-48444
+  m_Name: pb_Mesh-1254
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1678,7 +1712,7 @@ PrefabInstance:
     - target: {fileID: 3533487218403065241, guid: 958b625f997221f4ebb86fb1f03eaf80,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.005
+      value: 1.32
       objectReference: {fileID: 0}
     - target: {fileID: 3533487218403065241, guid: 958b625f997221f4ebb86fb1f03eaf80,
         type: 3}
@@ -1755,6 +1789,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 403414516}
+    - target: {fileID: 9136191702105035771, guid: 958b625f997221f4ebb86fb1f03eaf80,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9136191702105035771, guid: 958b625f997221f4ebb86fb1f03eaf80,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9136191702105035771, guid: 958b625f997221f4ebb86fb1f03eaf80,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 958b625f997221f4ebb86fb1f03eaf80, type: 3}
 --- !u!1001 &6950403158458498907
