@@ -9,29 +9,34 @@ public class PlayerInteract : MonoBehaviour
 {
     public bool playerInRange;
 
-    [SerializeField] PlayerControls _playerControls;
+    [SerializeField] PlayerInput PlayerInput;
 
     [SerializeField] UnityEvent onInteractEvent;
 
     private void OnEnable()
     {
-        if (_playerControls != null)
+        if (PlayerInput != null)
         {
-            _playerControls.Player.Interact.started += OnInteract;
+            InputAction interactKeyPressed = PlayerInput.actions["Interact"];
+
+            interactKeyPressed.started += OnInteract;
         }
     }    
     
     private void OnDisable()
     {
-        if (_playerControls != null)
+        if (PlayerInput != null)
         {
-            _playerControls.Player.Interact.started -= OnInteract;
+            InputAction interactKeyPressed = PlayerInput.actions["Interact"];
+
+            interactKeyPressed.started -= OnInteract;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        other.TryGetComponent(out PlayerInput playerInput);
+        if(playerInput)
         {
             playerInRange = true;
         }
@@ -44,7 +49,6 @@ public class PlayerInteract : MonoBehaviour
 
     void OnInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("Interacted");
         if (playerInRange)
         {
             onInteractEvent.Invoke();

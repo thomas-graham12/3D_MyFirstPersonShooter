@@ -5,16 +5,12 @@ using UnityEngine;
 public class AmmoPickup : MonoBehaviour
 {
     [SerializeField] int ammoPickupAmount;
+    [SerializeField] PlayerManager _playerManager;
 
-    private void OnTriggerEnter(Collider other)
+    public void PistolAmmoPickup()
     {
-        other.TryGetComponent(out PlayerManager playerManager);
+        _playerManager.pistolAmmoInStock += ammoPickupAmount;
 
-        if (playerManager)
-        {
-            playerManager.pistolAmmoInStock += ammoPickupAmount;
-
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }

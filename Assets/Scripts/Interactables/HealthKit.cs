@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class HealthKit : MonoBehaviour
 {
-    PlayerManager _playerManager;
+    [SerializeField] PlayerManager _playerManager;
     public int healthAmount;
 
     public void HealPlayer()
     {
         _playerManager.health += healthAmount;
+        Destroy(gameObject);
     }
 }
