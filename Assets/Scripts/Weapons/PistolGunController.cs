@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class PistolGunController : MonoBehaviour
 {
@@ -11,8 +12,6 @@ public class PistolGunController : MonoBehaviour
 
     [SerializeField] Camera fpsCam;
     [SerializeField] ParticleSystem muzzleFlash;
-
-    [SerializeField] float nextTimeToFire;
 
     PlayerControls _playerControls;
     PlayerManager _playerManager;
@@ -34,11 +33,13 @@ public class PistolGunController : MonoBehaviour
     private void OnEnable()
     {
         _playerControls.Player.Attack.started += Shoot;
+        _playerControls.Player.Reload.started += Reload;
     }
 
     private void OnDisable()
     {
         _playerControls.Player.Attack.started -= Shoot;
+        _playerControls.Player.Reload.started -= Reload;
     }
 
     public void Shoot(InputAction.CallbackContext context)
@@ -61,11 +62,16 @@ public class PistolGunController : MonoBehaviour
 
         if (_playerManager.pistolAmmoInGun <= 0)
         {
-            StartCoroutine(IReloadAmmo());
+            StartCoroutine(IReloadAmmoWhenEmpty());
         }
     }
 
-    IEnumerator IReloadAmmo()
+    public void Reload(InputAction.CallbackContext context)
+    {
+        StartCoroutine(IReloadAnytime());
+    }
+
+    IEnumerator IReloadAmmoWhenEmpty()
     {
         _playerControls.Player.Attack.started -= Shoot;
         yield return new WaitForSeconds(1f);
@@ -78,6 +84,26 @@ public class PistolGunController : MonoBehaviour
         {
             _playerManager.pistolAmmoInStock -= _playerManager.maxPistolAmmo;
             _playerManager.pistolAmmoInGun += _playerManager.maxPistolAmmo;
+        }
+        _playerControls.Player.Attack.started += Shoot;
+    }
+
+    IEnumerator IReloadAnytime()
+    {
+        int difference = _playerManager.maxPistolAmmo - _playerManager.pistolAmmoInGun;
+        _playerControls.Player.Attack.started -= Shoot;
+        yield return new WaitForSeconds(1f);
+        if (_playerManager.pistolAmmoInStock > 0 && difference < _playerManager.pistolAmmoInStock)
+        {
+            Debug.Log("If");
+            _playerManager.pistolAmmoInGun += difference;
+            _playerManager.pistolAmmoInStock -= difference;
+        }
+        else if (difference > _playerManager.pistolAmmoInStock)
+        {
+            Debug.Log("Else if");
+            _playerManager.pistolAmmoInGun += _playerManager.pistolAmmoInStock;
+            _playerManager.pistolAmmoInStock -= _playerManager.pistolAmmoInStock;
         }
         _playerControls.Player.Attack.started += Shoot;
     }
