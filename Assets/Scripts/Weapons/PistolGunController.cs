@@ -47,13 +47,12 @@ public class PistolGunController : MonoBehaviour
         {
             muzzleFlash.Play();
 
-            RaycastHit hit;
+            RaycastHit hit; // Stores raycast info in this variable.
             _playerManager.pistolAmmoInGun -= 1;
-            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) // if the the raycast does hit
             {
-                if (hit.transform.TryGetComponent(out IDamageable damageable))
+                if (hit.transform.TryGetComponent(out IDamageable damageable)) // Checks for IDamageable
                 {
-                    //damageable = damageTarget.GetComponent<IDamageable>();
                     damageable.TakeDamage(weaponDamage);
                 }
             }
