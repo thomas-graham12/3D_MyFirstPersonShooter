@@ -35,11 +35,11 @@ public class PlayerMovement : MonoBehaviour
             p *= p;
             if (crouching)
             {
-                _controller.height = Mathf.Lerp(_controller.height, 1, p);
+                _controller.height = Mathf.Lerp(_controller.height, 1, p); // Changes the controller's height to 1 if crouching.
             }
             else
             {
-                _controller.height = Mathf.Lerp(_controller.height, 2, p);
+                _controller.height = Mathf.Lerp(_controller.height, 2, p); // Changes the controller's height to 2 if not crouching.
             }
 
             if (p > 1)
@@ -63,12 +63,12 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 _moveDir = Vector3.zero;
         _moveDir.x = input.x;
-        _moveDir.z = input.y;
-        _controller.Move(transform.TransformDirection(_moveDir * moveSpeed * Time.deltaTime));
-        _velocity.y += gravity * Time.deltaTime;
+        _moveDir.z = input.y; // moveDir.z is input.y because input is a Vec2
+        _controller.Move(transform.TransformDirection(_moveDir * moveSpeed * Time.deltaTime)); // Moves the character towards the moveDir
+        _velocity.y += gravity * Time.deltaTime; 
         if (isGrounded && _velocity.y < 0)
         {
-            _velocity.y = -2f;
+            _velocity.y = -2f; // Locks gravity at a max of -2
         }
         _controller.Move(_velocity * Time.deltaTime);
     }

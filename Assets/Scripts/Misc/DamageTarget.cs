@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class DamageTarget : MonoBehaviour, IDamageable
 {
+    /// <summary>
+    /// Attaches to the enemy to act as health. Inherits from IDamageable interface to be able to take damage.
+    /// </summary>
+
     public int maxHealth;
     public int Health { get; private set; }
 

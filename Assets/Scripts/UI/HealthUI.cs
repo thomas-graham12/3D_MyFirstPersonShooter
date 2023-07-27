@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
+    /// <summary>
+    /// Grabs the slider, then makes the slider the health of the player divided by the maxHealth (gives a 0-1 value that the slider can use). 
+    /// </summary>
+
     [SerializeField] PlayerManager _playerManager;
     Slider _slider;
 

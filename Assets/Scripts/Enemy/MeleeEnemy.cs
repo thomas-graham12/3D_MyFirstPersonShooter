@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class MeleeEnemy : MonoBehaviour
 {
+    /// <summary>
+    /// Melee enemy that deals damage if player collides with it.
+    /// </summary>
+
     [SerializeField] int damageAmount;
     bool takenDamage = false;
 
@@ -29,7 +33,7 @@ public class MeleeEnemy : MonoBehaviour
     }
 
 
-    IEnumerator ITimeBetweenDamage()
+    IEnumerator ITimeBetweenDamage() // Used to give time before player can take damage again
     {
         yield return new WaitForSeconds(.2f);
         takenDamage = false;

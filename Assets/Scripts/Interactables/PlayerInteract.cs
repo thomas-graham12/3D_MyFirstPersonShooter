@@ -7,6 +7,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
+    /// <summary>
+    /// Checks to see if player is in radius, then lets the player interact if so
+    /// </summary>
+
     public bool playerInRange;
 
     [SerializeField] PlayerInput PlayerInput;
@@ -15,7 +19,7 @@ public class PlayerInteract : MonoBehaviour
 
     private void OnEnable()
     {
-        if (PlayerInput != null)
+        if (PlayerInput != null) // Removes any null exceptions
         {
             InputAction interactKeyPressed = PlayerInput.actions["Interact"];
 

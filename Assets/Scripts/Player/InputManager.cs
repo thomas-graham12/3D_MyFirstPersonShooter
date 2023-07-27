@@ -5,6 +5,10 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    /// <summary>
+    /// Holds all the Player's actions that are strictly tied to how the player moves.
+    /// </summary>
+
     PlayerControls _playerControls;
     PlayerControls.PlayerActions _playerActions;
     PlayerMovement _playerMovement;
@@ -26,14 +30,13 @@ public class InputManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void FixedUpdate() // Used for player movement
     {
         // tell the playermovement to move using the value from our movement action.
         _playerMovement.ProcessMove(_playerActions.Movement.ReadValue<Vector2>());
     }
 
-    private void LateUpdate()
+    private void LateUpdate() // Used for camera movement
     {
         _playerLook.ProcessLook(_playerActions.Look.ReadValue<Vector2>());
     }

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FloatingObject : MonoBehaviour
 {
+    /// <summary>
+    /// Lets object float up and down
+    /// </summary>
+
     Vector3 startPos;
     [SerializeField] float maxHeight;
     [SerializeField] float speed;
